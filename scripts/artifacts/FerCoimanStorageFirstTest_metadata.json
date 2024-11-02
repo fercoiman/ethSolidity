@@ -1,0 +1,72 @@
+{
+	"compiler": {
+		"version": "0.8.26+commit.8a97fa7a"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_mensaje",
+						"type": "string"
+					}
+				],
+				"name": "establecerMensaje",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "obtenerMensaje",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"scripts/FerCoiman.sol": "FerCoimanStorageFirstTest"
+		},
+		"evmVersion": "cancun",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"scripts/FerCoiman.sol": {
+			"keccak256": "0x08d0042fb0f0e5780b4594e43e28249ddb0c5140e471fa35ccec5afac7ab73db",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://7b82473b97bab339ec7d76f3191a7dd4bd87b05d9b0938e5860c154512db9bbe",
+				"dweb:/ipfs/QmVqFJ2b4edeJs1v7FEJWd654DA3aALK8R7sBut8GY9JwC"
+			]
+		}
+	},
+	"version": 1
+}
