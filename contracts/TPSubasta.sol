@@ -25,7 +25,7 @@ contract SubastaEthKipu{
         owner = msg.sender; // 'msg.sender' is sender of current call, contract deployer for a constructor
         emit OwnerSet(address(0), owner);
     }
-
+//agrego un comentario
 
     function ofertar(){
 
