@@ -22,7 +22,7 @@ Documentación clara y completa explicando funciones, variables y eventos.
 
 
 contract Subasta {
-    address public bidOwner;
+    address payable public bidOwner;
     uint256 public bidStartTime;
     uint256 public bidEndTime;
     address public highestBidder;
@@ -32,12 +32,12 @@ contract Subasta {
     uint256 public constant COMMISSION_PERCENT = 2; // Comisión del 2% para el gas
 
     struct Oferta {
-        address bidder;
+        address payable bidder;
         uint256 amount;
     }
 
     Oferta[] public ofertas;
-    mapping(address => uint256) public balancePendiente;
+    mapping(address => uint256) public remainingBalance;
 
     // Eventos
     event NuevaOferta(address indexed bidder, uint256 monto, uint256 timestamp);
@@ -58,7 +58,7 @@ contract Subasta {
 
     // Constructor: Inicializar la subasta con los parámetros necesarios.
     constructor(uint256 _duration) {
-        bidOwner = msg.sender;
+        bidOwner = payable(msg.sender);
         bidStartTime = block.timestamp;
         bidEndTime = bidStartTime + _duration;
         highestBid = 0;
@@ -67,23 +67,23 @@ contract Subasta {
     function ofertar() external payable soloMientrasActiva {
         require(msg.value > 0, "Bid must be greater than zero");
 
-        uint256 nuevaOferta = balancePendiente[msg.sender] + msg.value;
+        uint256 nuevaOferta = remainingBalance[msg.sender] + msg.value;
         require(nuevaOferta >= highestBid + (highestBid * BID_INC_PERCENT) / 100, "Offer must be at least 5% higher");
 
         // Registrar la oferta
-        ofertas.push(Oferta(msg.sender, nuevaOferta));
+        ofertas.push(Oferta(payable(msg.sender), nuevaOferta));
 
         // Reembolso de cualquier exceso anterior del oferente
-        if (balancePendiente[msg.sender] > 0) {
-            uint256 exceso = balancePendiente[msg.sender];
-            balancePendiente[msg.sender] = 0;
+        if (remainingBalance[msg.sender] > 0) {
+            uint256 exceso = remainingBalance[msg.sender];
+            remainingBalance[msg.sender] = 0;
             payable(msg.sender).transfer(exceso);
         }
 
         // Actualizar la mejor oferta
         highestBidder = msg.sender;
         highestBid = nuevaOferta;
-        balancePendiente[msg.sender] = nuevaOferta;
+        remainingBalance[msg.sender] = nuevaOferta;
 
         emit NuevaOferta(msg.sender, nuevaOferta, block.timestamp);
 
@@ -107,13 +107,13 @@ contract Subasta {
         require(block.timestamp > bidEndTime, "La subasta aun esta en curso");
         for (uint256 i = 0; i < ofertas.length; i++) {
             address oferente = ofertas[i].bidder;
-            uint256 montoOfrecido = balancePendiente[oferente];
+            uint256 montoOfrecido = remainingBalance[oferente];
             
             if (oferente != highestBidder && montoOfrecido > 0) {
                 uint256 comision = (montoOfrecido * COMMISSION_PERCENT) / 100;
                 uint256 montoDevuelto = montoOfrecido - comision;
 
-                balancePendiente[oferente] = 0;
+                remainingBalance[oferente] = 0;
                 payable(oferente).transfer(montoDevuelto);
 
                 emit DepositoDevuelto(oferente, montoDevuelto);
@@ -123,10 +123,10 @@ contract Subasta {
     }
 
     function retirarExceso() external {
-        uint256 exceso = balancePendiente[msg.sender] - highestBid;
+        uint256 exceso = remainingBalance[msg.sender] - highestBid;
         require(exceso > 0, "No tiene suficiente exceso");
         
-        balancePendiente[msg.sender] -= exceso;
+        remainingBalance[msg.sender] -= exceso;
         payable(msg.sender).transfer(exceso);
     }
 }

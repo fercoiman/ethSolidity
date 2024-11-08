@@ -9,7 +9,17 @@
 				"inputs": [
 					{
 						"internalType": "uint256",
-						"name": "_duration",
+						"name": "_auctionDurationMinutes",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_minIncrement",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_gasFeePercent",
 						"type": "uint256"
 					}
 				],
@@ -39,6 +49,19 @@
 				"anonymous": false,
 				"inputs": [
 					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "newEndTime",
+						"type": "uint256"
+					}
+				],
+				"name": "AuctionExtended",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
 						"indexed": true,
 						"internalType": "address",
 						"name": "bidder",
@@ -56,12 +79,12 @@
 			},
 			{
 				"inputs": [],
-				"name": "auctionEndTime",
+				"name": "auctionEnded",
 				"outputs": [
 					{
-						"internalType": "uint256",
+						"internalType": "bool",
 						"name": "",
-						"type": "uint256"
+						"type": "bool"
 					}
 				],
 				"stateMutability": "view",
@@ -69,9 +92,15 @@
 			},
 			{
 				"inputs": [],
-				"name": "bid",
-				"outputs": [],
-				"stateMutability": "payable",
+				"name": "auctioneer",
+				"outputs": [
+					{
+						"internalType": "address payable",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -82,12 +111,17 @@
 						"type": "uint256"
 					}
 				],
-				"name": "bidders",
+				"name": "bids",
 				"outputs": [
 					{
-						"internalType": "address",
-						"name": "",
+						"internalType": "address payable",
+						"name": "bidder",
 						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
 					}
 				],
 				"stateMutability": "view",
@@ -114,19 +148,75 @@
 			},
 			{
 				"inputs": [],
-				"name": "endAuction",
+				"name": "endTime",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "finalizeAuction",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
 				"inputs": [],
-				"name": "ended",
+				"name": "gasFeePercent",
 				"outputs": [
 					{
-						"internalType": "bool",
+						"internalType": "uint256",
 						"name": "",
-						"type": "bool"
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getBids",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "address payable",
+								"name": "bidder",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "amount",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct Auction.Bid[]",
+						"name": "",
+						"type": "tuple[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getWinner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
 					}
 				],
 				"stateMutability": "view",
@@ -137,6 +227,24 @@
 				"name": "highestBid",
 				"outputs": [
 					{
+						"internalType": "address payable",
+						"name": "bidder",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "minIncrement",
+				"outputs": [
+					{
 						"internalType": "uint256",
 						"name": "",
 						"type": "uint256"
@@ -147,60 +255,25 @@
 			},
 			{
 				"inputs": [],
-				"name": "highestBidder",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
+				"name": "placeBid",
+				"outputs": [],
+				"stateMutability": "payable",
 				"type": "function"
 			},
 			{
 				"inputs": [],
-				"name": "owner",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
+				"name": "refundLosingBids",
+				"outputs": [],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
 				"inputs": [],
-				"name": "showBids",
+				"name": "startTime",
 				"outputs": [
-					{
-						"internalType": "address[]",
-						"name": "",
-						"type": "address[]"
-					},
-					{
-						"internalType": "uint256[]",
-						"name": "",
-						"type": "uint256[]"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "showWinner",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "ganador",
-						"type": "address"
-					},
 					{
 						"internalType": "uint256",
-						"name": "oferta",
+						"name": "",
 						"type": "uint256"
 					}
 				],
@@ -209,46 +282,15 @@
 			},
 			{
 				"inputs": [],
-				"name": "withdrawExcess",
+				"name": "withdrawPartialDeposit",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
 			}
 		],
 		"devdoc": {
-			"details": "Gestión de una subasta con control de ofertas, reembolsos y extensión del tiempo.",
 			"kind": "dev",
-			"methods": {
-				"bid()": {
-					"details": "Función para ofertar. La oferta debe ser 5% mayor que la actual."
-				},
-				"constructor": {
-					"details": "Constructor que inicializa la subasta.",
-					"params": {
-						"_duration": "Duración de la subasta en segundos."
-					}
-				},
-				"endAuction()": {
-					"details": "Finaliza la subasta y devuelve los depósitos a los perdedores."
-				},
-				"showBids()": {
-					"details": "Muestra la lista de ofertantes y sus montos.",
-					"returns": {
-						"_0": "Lista de ofertantes y montos ofertados."
-					}
-				},
-				"showWinner()": {
-					"details": "Función para mostrar al ganador y la oferta ganadora.",
-					"returns": {
-						"ganador": "Dirección del ofertante ganador.",
-						"oferta": "Valor de la oferta ganadora."
-					}
-				},
-				"withdrawExcess()": {
-					"details": "Permite a los ofertantes retirar el exceso de sus depósitos."
-				}
-			},
-			"title": "Auction",
+			"methods": {},
 			"version": 1
 		},
 		"userdoc": {
@@ -259,7 +301,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/EjemploSubasta.sol": "Auction"
+			"contracts/OtroEjemploSubasta.sol": "Auction"
 		},
 		"evmVersion": "cancun",
 		"libraries": {},
@@ -273,12 +315,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"contracts/EjemploSubasta.sol": {
-			"keccak256": "0x66869866c83953c7d99c975e2df33963b66e480cecaced2d3c3123ca55f7b8a2",
+		"contracts/OtroEjemploSubasta.sol": {
+			"keccak256": "0xff9be33ce0817f2d46460ed139f1dad0b385d391d3862fd59ca24762303b0ae3",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://b4dafab914d139c76c5f04c32fdb50055f651bfd44cdad603a7794ab1497fef8",
-				"dweb:/ipfs/Qmeb78vb8c9rN61ghicNLwu4zwAEWjwEbnbf2sQ1SzBkxv"
+				"bzz-raw://2a2ac84eee54d37bb3a219fe36bcfc5e805c635a34ff8f6aa71866b8eea6f192",
+				"dweb:/ipfs/QmZbiZ9M1yXcogcnEFQkqFZ4J2P67Jb9yJqc8GikWKTPJu"
 			]
 		}
 	},
