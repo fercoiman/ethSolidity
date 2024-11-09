@@ -95,6 +95,7 @@ contract TPSubasta{
 
     // Función para finalizar la subasta y devolver depósitos a los perdedores
     function finalizarSubasta() public soloPropietario subastaEnCurso {
+        
         subastaActiva = false;
         emit GanadorDefinido(ganador, ofertaGanadora);
     }
