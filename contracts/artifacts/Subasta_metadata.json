@@ -6,7 +6,13 @@
 	"output": {
 		"abi": [
 			{
-				"inputs": [],
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_auctionDurationMinutes",
+						"type": "uint256"
+					}
+				],
 				"stateMutability": "nonpayable",
 				"type": "constructor"
 			},
@@ -363,11 +369,11 @@
 	},
 	"sources": {
 		"contracts/TPSubastaW.sol": {
-			"keccak256": "0xd25d089f12e096313c57b0509af8cb87bb3087eb3523cf0396816403574f7013",
+			"keccak256": "0x450ac0f952daebda543a26fae0b1402a1cdd3572a6b9004700d9cd4d874adb6a",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://a97c2346c1a9379d888dcd4c02d2ae8f1dcbac9b5dd14b1d0ef83e769062fc7a",
-				"dweb:/ipfs/QmZbys2mPrqkS5rLgRfaaHAPN2dUDjGTo2geqzgiy9bF1a"
+				"bzz-raw://a26d1a7885f8d1091292a43cf413f20ad4b1e316cf3910ff3209ebcee3c84a97",
+				"dweb:/ipfs/Qmf1wqjaAmiQj77tx5ARRRC4hVANtJXTmFp7Yb6dx6aryi"
 			]
 		}
 	},

@@ -36,7 +36,6 @@ contract Subasta {
     uint256 public constant EXTENSION_TIME = 10 minutes;
     uint256 public constant BID_INC_PERCENT = 5; // Aumento mínimo del 5%
     //uint256 public bidAmount;
-
     bool public auctionEnded;
 
     struct Bid {
@@ -45,13 +44,15 @@ contract Subasta {
     }
 
     Bid public highestBid;
+    //estructura con las ofertas depositadas
     mapping(address => uint256) public deposits;
+    
     Bid[] public bids;
 
     //Constructor. Inicializa la subasta con los parámetros necesario para su funcionamiento.
-    constructor()
+    constructor(uint256 _auctionDurationMinutes)
     {
-        uint256 _auctionDurationMinutes;
+        
         auctioneer = payable(msg.sender);
         bidStartTime = block.timestamp;
         bidEndTime = block.timestamp + (_auctionDurationMinutes * 1 minutes);
