@@ -32,17 +32,10 @@ contract Subasta {
     address payable public auctioneer;
     uint256 public startTime;
     uint256 public endTime;
-    //uint256 public BID_INC_PERCENT; // Incremento mínimo del 5%
     uint256 public constant GAS_FEE_PERCENT = 2; // Comisión del 2%
-   
-
     uint256 public constant EXTENSION_TIME = 10 minutes;
     uint256 public constant BID_INC_PERCENT = 5; // Aumento mínimo del 5%
-    //uint256 public constant GAS_FEE_PERCENT = 2; // Comisión del 2% para el gas
     //uint256 public bidAmount;
-
-
-
 
     bool public auctionEnded;
 
@@ -58,8 +51,7 @@ contract Subasta {
     //Constructor. Inicializa la subasta con los parámetros necesario para su funcionamiento.
     constructor(
         uint256 _auctionDurationMinutes
-        //uint256 _BID_INC_PERCENT
-        //uint256 _GAS_FEE_PERCENT
+
     ) {
         auctioneer = payable(msg.sender);
         startTime = block.timestamp;
@@ -75,12 +67,12 @@ contract Subasta {
     event NuevaOferta(address indexed bidder, uint256 monto, uint256 timestamp);
     event GanadorAnunciado(address ganador, uint256 montoGanador);
     event DepositoDevuelto(address indexed oferente, uint256 monto);
-    event ExtiendeSubasta(uint256 nuevaHoraFin);
+
 
     modifier onlyAuctioneer() {
         require(
             msg.sender == auctioneer,
-            "Only auctioneer can perform this action."
+            "Only sender can perform this action."
         );
         _;
     }
@@ -91,7 +83,7 @@ contract Subasta {
     }
 
     modifier onlyAfterEnd() {
-        require(block.timestamp >= endTime, "Auction is still ongoing.");
+        require(block.timestamp >= endTime, "Auction is still in progress.");
         _;
     }
 

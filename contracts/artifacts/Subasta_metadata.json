@@ -407,11 +407,11 @@
 	},
 	"sources": {
 		"contracts/TPSubastaW.sol": {
-			"keccak256": "0x7aaef6bf1c6c42da210006537c3d95eb4d8f626cbcfe7d0bb746b019f2ca80bc",
+			"keccak256": "0xb995bdeeb5d67db4602947217ebb9f1b4c6b501ed2e6006f427bdd8652c5026c",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://b7c825ea5304d9a7d6a277d9485f2b95ded3a145a5e61e11169f23915195e4d3",
-				"dweb:/ipfs/QmVkcigMMeUUDxw6bGSY83WnnUaFDG3FvDLeYNev1vKvTS"
+				"bzz-raw://31dd73c4d6927a664ac89f8cb612910c9db4f87ffc29073336f238cb584d04ad",
+				"dweb:/ipfs/QmedCc7bbaCCsjBucZgmKN4VmknyRm7Yg1c3MkMh9UPh2d"
 			]
 		}
 	},
