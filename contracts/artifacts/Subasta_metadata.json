@@ -149,9 +149,27 @@
 				"name": "auctioneer",
 				"outputs": [
 					{
-						"internalType": "address payable",
+						"internalType": "address",
 						"name": "",
 						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "bid",
+				"outputs": [
+					{
+						"internalType": "address payable",
+						"name": "bidder",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
 					}
 				],
 				"stateMutability": "view",
@@ -318,11 +336,11 @@
 	},
 	"sources": {
 		"contracts/TPSubastaW-v1.sol": {
-			"keccak256": "0xb7a3f86bb906789f52d94cbf46870eb4404acc0186ebb6aa15b08d7bb27f01ac",
+			"keccak256": "0xffeec8147511c641c87d1856747291fe21908b7cdf121d27d7f4625911cdedf8",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://63b8709a8ed11bf29315b86e3e2dba094a8c5d93571e7629fedae417bd1f7b7a",
-				"dweb:/ipfs/Qmde323MEVrZjPuEtuEEmqmriJt2TLJEG3RVPERH84B7c8"
+				"bzz-raw://80d26ad4eecbcef8129259936dd7621408b552bcae991481b82e3c97fdd9ec7c",
+				"dweb:/ipfs/QmTc94t2Rv55AjaNY3PzDb9DHnAbUzWNtYKPeXJeXmpRip"
 			]
 		}
 	},

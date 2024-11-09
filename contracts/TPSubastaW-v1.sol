@@ -2,7 +2,7 @@
 pragma solidity ^0.8.0;
 
 contract Subasta {
-    address payable public auctioneer;
+    address public auctioneer;
     uint256 public bidStartTime; 
     uint256 public bidEndTime;
     uint256 public constant GAS_FEE_PERCENT = 2;
@@ -16,11 +16,13 @@ contract Subasta {
     }
 
     Bid public highestBid;
+    Bid public bid;
+
     mapping(address => uint256) public deposits;
     Bid[] public bids;
 
     constructor(uint256 _auctionDurationMinutes) {
-        auctioneer = payable(msg.sender);
+        auctioneer = msg.sender;
         bidStartTime = block.timestamp;
         bidEndTime = block.timestamp + (_auctionDurationMinutes * 1 minutes);
         auctionEnded = false;
@@ -50,19 +52,30 @@ contract Subasta {
         require(bidAmount > 0, "Bid must be greater than zero.");
         uint256 minBidAmount = highestBid.amount + (highestBid.amount * BID_INC_PERCENT) / 100;
         require(msg.value >= minBidAmount, "Bid must be at least 5% higher.");
+        address bidder = msg.sender;
+        uint256 amount = msg.value;
 
-        if (highestBid.bidder != address(0)) {
-            deposits[highestBid.bidder] += highestBid.amount;
+        if(bidAmount > highestBid.amount) {
+            highestBid = Bid(payable(bidder), amount);
+            bids.push(highestBid);
+        }
+        else{
+            bid = Bid(payable(bidder),amount);
+            bids.push(bid);
         }
 
-        highestBid = Bid(payable(msg.sender), msg.value);
-        bids.push(highestBid);
+            // VERRRRR
+         if (highestBid.bidder != address(0)) {
+                deposits[highestBid.bidder] += highestBid.amount;
+            }
 
+
+        
         // Extiende la subasta cada vez que se recibe una oferta en los últimos 10 minutos
-        if (block.timestamp >= bidEndTime - EXTENSION_TIME) {
+        
             bidEndTime += EXTENSION_TIME;
             emit AuctionExtended(bidEndTime);
-        }
+        
 
         emit NewBid(msg.sender, msg.value, block.timestamp);
     }
@@ -72,12 +85,12 @@ contract Subasta {
         return (highestBid.bidder, highestBid.amount);
     }
 
-    function finalizeAuction() public onlyAuctioneer onlyAfterEnd {
+    function finalizeAuction() public onlyAuctioneer {
         require(!auctionEnded, "Auction already finalized.");
         auctionEnded = true;
 
         uint256 gasFee = (highestBid.amount * GAS_FEE_PERCENT) / 100;
-        auctioneer.transfer(highestBid.amount - gasFee);
+        payable(auctioneer).transfer(highestBid.amount - gasFee);
 
         emit AuctionEnded(highestBid.bidder, highestBid.amount);
     }
