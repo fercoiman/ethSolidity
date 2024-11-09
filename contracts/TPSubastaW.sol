@@ -30,8 +30,8 @@ Consideraciones adicionales:
 */
 contract Subasta {
     address payable public auctioneer;
-    uint256 public startTime;
-    uint256 public endTime;
+    uint256 public bidStartTime; 
+    uint256 public bidEndTime;
     uint256 public constant GAS_FEE_PERCENT = 2; // Comisión del 2%
     uint256 public constant EXTENSION_TIME = 10 minutes;
     uint256 public constant BID_INC_PERCENT = 5; // Aumento mínimo del 5%
@@ -49,24 +49,23 @@ contract Subasta {
     Bid[] public bids;
 
     //Constructor. Inicializa la subasta con los parámetros necesario para su funcionamiento.
-    constructor(
-        uint256 _auctionDurationMinutes
-
-    ) {
+    constructor()
+    {
+        uint256 _auctionDurationMinutes;
         auctioneer = payable(msg.sender);
-        startTime = block.timestamp;
-        endTime = block.timestamp + (_auctionDurationMinutes * 1 minutes);
+        bidStartTime = block.timestamp;
+        bidEndTime = block.timestamp + (_auctionDurationMinutes * 1 minutes);
         auctionEnded = false;
     }
 
     // Eventos
     event NewBid(address indexed bidder, uint256 amount, uint256 timestamp);
-    event AuctionExtended(uint256 newEndTime);
+    event AuctionExtended(uint256 newbidEndTime);
     event AuctionEnded(address winner, uint256 amount);
     /*    VEEEEERRRRRRR.  */
-    event NuevaOferta(address indexed bidder, uint256 monto, uint256 timestamp);
-    event GanadorAnunciado(address ganador, uint256 montoGanador);
-    event DepositoDevuelto(address indexed oferente, uint256 monto);
+
+    event WeHaveAWinner(address ganador, uint256 montoGanador);
+    event Refund(address indexed oferente, uint256 monto);
 
 
     modifier onlyAuctioneer() {
@@ -78,12 +77,12 @@ contract Subasta {
     }
 
     modifier onlyBeforeEnd() {
-        require(block.timestamp < endTime, "Auction has already ended.");
+        require(block.timestamp < bidEndTime, "Auction has already ended.");
         _;
     }
 
     modifier onlyAfterEnd() {
-        require(block.timestamp >= endTime, "Auction is still in progress.");
+        require(block.timestamp >= bidEndTime, "Auction is still in progress.");
         _;
     }
 
@@ -108,9 +107,9 @@ contract Subasta {
         bids.push(highestBid);
 
         // Extiendo subasta si está dentro de los últimos 10 minutos del tiempo original
-        if (block.timestamp >= endTime - 10 minutes) {
-            endTime += 10 minutes;
-            emit AuctionExtended(endTime);
+        if (block.timestamp >= bidEndTime - 10 minutes) {
+            bidEndTime += 10 minutes;
+            emit AuctionExtended(bidEndTime);
         }
 
         emit NewBid(msg.sender, msg.value,block.timestamp);
