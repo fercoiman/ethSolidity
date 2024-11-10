@@ -28,7 +28,7 @@ Consideraciones adicionales:
     Se deben utilizar eventos para comunicar los cambios de estado de la subasta a los participantes.
     La documentación del contrato debe ser clara y completa, explicando las funciones, variables y eventos.
 */
-contract Subasta {
+contract TPSubastaW {
     address payable public auctioneer;
     uint256 public bidStartTime; 
     uint256 public bidEndTime;

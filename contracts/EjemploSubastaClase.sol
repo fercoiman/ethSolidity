@@ -2,7 +2,7 @@
 pragma solidity >0.8.0;
 
 
-contract Subasta {
+contract SubastaClase {
     //variables de estado: valorInicial, fechaInicio y tiermpoDuracion)
     uint256 public valorInicial;
     uint256 public fechaInicio;

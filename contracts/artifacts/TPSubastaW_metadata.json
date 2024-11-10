@@ -11,16 +11,6 @@
 						"internalType": "uint256",
 						"name": "_auctionDurationMinutes",
 						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "_minIncrement",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "_gasFeePercent",
-						"type": "uint256"
 					}
 				],
 				"stateMutability": "nonpayable",
@@ -51,7 +41,7 @@
 					{
 						"indexed": false,
 						"internalType": "uint256",
-						"name": "newEndTime",
+						"name": "newbidEndTime",
 						"type": "uint256"
 					}
 				],
@@ -72,10 +62,93 @@
 						"internalType": "uint256",
 						"name": "amount",
 						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "timestamp",
+						"type": "uint256"
 					}
 				],
 				"name": "NewBid",
 				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "oferente",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "monto",
+						"type": "uint256"
+					}
+				],
+				"name": "Refund",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "ganador",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "montoGanador",
+						"type": "uint256"
+					}
+				],
+				"name": "WeHaveAWinner",
+				"type": "event"
+			},
+			{
+				"inputs": [],
+				"name": "BID_INC_PERCENT",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "EXTENSION_TIME",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "GAS_FEE_PERCENT",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
 			},
 			{
 				"inputs": [],
@@ -98,6 +171,32 @@
 						"internalType": "address payable",
 						"name": "",
 						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "bidEndTime",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "bidStartTime",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
 					}
 				],
 				"stateMutability": "view",
@@ -148,35 +247,9 @@
 			},
 			{
 				"inputs": [],
-				"name": "endTime",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
 				"name": "finalizeAuction",
 				"outputs": [],
 				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "gasFeePercent",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -196,7 +269,7 @@
 								"type": "uint256"
 							}
 						],
-						"internalType": "struct Auction.Bid[]",
+						"internalType": "struct TPSubastaW.Bid[]",
 						"name": "",
 						"type": "tuple[]"
 					}
@@ -241,20 +314,13 @@
 				"type": "function"
 			},
 			{
-				"inputs": [],
-				"name": "minIncrement",
-				"outputs": [
+				"inputs": [
 					{
 						"internalType": "uint256",
-						"name": "",
+						"name": "bidAmount",
 						"type": "uint256"
 					}
 				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
 				"name": "placeBid",
 				"outputs": [],
 				"stateMutability": "payable",
@@ -265,19 +331,6 @@
 				"name": "refundLosingBids",
 				"outputs": [],
 				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "startTime",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -301,7 +354,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/OtroEjemploSubasta.sol": "Auction"
+			"contracts/TPSubastaW.sol": "TPSubastaW"
 		},
 		"evmVersion": "cancun",
 		"libraries": {},
@@ -315,12 +368,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"contracts/OtroEjemploSubasta.sol": {
-			"keccak256": "0xff9be33ce0817f2d46460ed139f1dad0b385d391d3862fd59ca24762303b0ae3",
+		"contracts/TPSubastaW.sol": {
+			"keccak256": "0x2217656afdcf88504465d40806024a7e476e2ff2d70741d0c7aaf8eff8953f0c",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://2a2ac84eee54d37bb3a219fe36bcfc5e805c635a34ff8f6aa71866b8eea6f192",
-				"dweb:/ipfs/QmZbiZ9M1yXcogcnEFQkqFZ4J2P67Jb9yJqc8GikWKTPJu"
+				"bzz-raw://c67a2991edc6fbd0d1f2c52329e23555c1cb19031f4819ec88965cb8b502a49b",
+				"dweb:/ipfs/QmZEC3VhJYKVB6eBCA4CxFXRnViTsKmGw1jB3M6sTTekFw"
 			]
 		}
 	},

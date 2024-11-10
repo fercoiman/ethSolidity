@@ -5,7 +5,7 @@ pragma solidity ^0.8.18;
  * @title Auction
  * @dev Gestión de una subasta con control de ofertas, reembolsos y extensión del tiempo.
  */
-contract Auction {
+contract AuctionExample {
     address public owner;             // Dirección del creador del contrato.
     uint256 public auctionEndTime;    // Momento en que termina la subasta.
     uint256 public highestBid;        // Valor de la oferta más alta.

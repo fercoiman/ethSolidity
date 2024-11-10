@@ -328,7 +328,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/TPSubastaW-v1.sol": "Subasta"
+			"contracts/TPSubastaV2.sol": "TPSubastaV2"
 		},
 		"evmVersion": "cancun",
 		"libraries": {},
@@ -342,12 +342,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"contracts/TPSubastaW-v1.sol": {
-			"keccak256": "0x8913f363e6be3cb955e51c9339e06545c1c399ed123379e7067afa77a0d3d2e3",
+		"contracts/TPSubastaV2.sol": {
+			"keccak256": "0x4ef382fdfd3a807e99cdc150525cb6f0530173190f8b0ce8439867ffc2476e27",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://417ca8b4e6164eb4848f00ea26850e20783b59fa28d2546865d224b61132b705",
-				"dweb:/ipfs/QmNibb2qpWjKHPQANrtAZmQQzLfTGpDZCrzeMFH6vwS7Z6"
+				"bzz-raw://b66067977398dd5b28d9e9e83e7a96fd0ae3eab5afdf2f52f45ec1fb7e1dbbe8",
+				"dweb:/ipfs/QmcMxBQDTXoC6ee1txX7wE1Liy7aLta3Q76zNJvvGWE65L"
 			]
 		}
 	},

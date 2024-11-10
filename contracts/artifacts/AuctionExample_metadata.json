@@ -9,7 +9,7 @@
 				"inputs": [
 					{
 						"internalType": "uint256",
-						"name": "_duracionSubasta",
+						"name": "_duration",
 						"type": "uint256"
 					}
 				],
@@ -22,60 +22,41 @@
 					{
 						"indexed": false,
 						"internalType": "address",
-						"name": "ganador",
+						"name": "winner",
 						"type": "address"
 					},
 					{
 						"indexed": false,
 						"internalType": "uint256",
-						"name": "monto",
+						"name": "amount",
 						"type": "uint256"
 					}
 				],
-				"name": "GanadorDefinido",
+				"name": "AuctionEnded",
 				"type": "event"
 			},
 			{
 				"anonymous": false,
 				"inputs": [
 					{
-						"indexed": false,
+						"indexed": true,
 						"internalType": "address",
-						"name": "ofertante",
+						"name": "bidder",
 						"type": "address"
 					},
 					{
 						"indexed": false,
 						"internalType": "uint256",
-						"name": "monto",
+						"name": "amount",
 						"type": "uint256"
 					}
 				],
-				"name": "OfertaAceptada",
+				"name": "NewBid",
 				"type": "event"
 			},
 			{
-				"anonymous": false,
-				"inputs": [
-					{
-						"indexed": false,
-						"internalType": "uint256",
-						"name": "nuevoTiempoFinal",
-						"type": "uint256"
-					}
-				],
-				"name": "SubastaExtendida",
-				"type": "event"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"name": "depositos",
+				"inputs": [],
+				"name": "auctionEndTime",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -88,96 +69,7 @@
 			},
 			{
 				"inputs": [],
-				"name": "duracionSubasta",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "finalizarSubasta",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "ganador",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "mostrarGanador",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "mostrarOfertas",
-				"outputs": [
-					{
-						"components": [
-							{
-								"internalType": "address",
-								"name": "ofertante",
-								"type": "address"
-							},
-							{
-								"internalType": "uint256",
-								"name": "monto",
-								"type": "uint256"
-							}
-						],
-						"internalType": "struct TPSubasta.Oferta[]",
-						"name": "",
-						"type": "tuple[]"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "ofertaGanadora",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "ofertar",
+				"name": "bid",
 				"outputs": [],
 				"stateMutability": "payable",
 				"type": "function"
@@ -190,17 +82,77 @@
 						"type": "uint256"
 					}
 				],
-				"name": "ofertas",
+				"name": "bidders",
 				"outputs": [
 					{
 						"internalType": "address",
-						"name": "ofertante",
+						"name": "",
 						"type": "address"
-					},
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "deposits",
+				"outputs": [
 					{
 						"internalType": "uint256",
-						"name": "monto",
+						"name": "",
 						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "endAuction",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "ended",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "highestBid",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "highestBidder",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
 					}
 				],
 				"stateMutability": "view",
@@ -221,26 +173,17 @@
 			},
 			{
 				"inputs": [],
-				"name": "retirarDeposito",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "retirarExceso",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "subastaActiva",
+				"name": "showBids",
 				"outputs": [
 					{
-						"internalType": "bool",
+						"internalType": "address[]",
 						"name": "",
-						"type": "bool"
+						"type": "address[]"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "",
+						"type": "uint256[]"
 					}
 				],
 				"stateMutability": "view",
@@ -248,11 +191,16 @@
 			},
 			{
 				"inputs": [],
-				"name": "tiempoInicio",
+				"name": "showWinner",
 				"outputs": [
 					{
+						"internalType": "address",
+						"name": "ganador",
+						"type": "address"
+					},
+					{
 						"internalType": "uint256",
-						"name": "",
+						"name": "oferta",
 						"type": "uint256"
 					}
 				],
@@ -261,21 +209,46 @@
 			},
 			{
 				"inputs": [],
-				"name": "totalOfertas",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
+				"name": "withdrawExcess",
+				"outputs": [],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			}
 		],
 		"devdoc": {
+			"details": "Gestión de una subasta con control de ofertas, reembolsos y extensión del tiempo.",
 			"kind": "dev",
-			"methods": {},
+			"methods": {
+				"bid()": {
+					"details": "Función para ofertar. La oferta debe ser 5% mayor que la actual."
+				},
+				"constructor": {
+					"details": "Constructor que inicializa la subasta.",
+					"params": {
+						"_duration": "Duración de la subasta en segundos."
+					}
+				},
+				"endAuction()": {
+					"details": "Finaliza la subasta y devuelve los depósitos a los perdedores."
+				},
+				"showBids()": {
+					"details": "Muestra la lista de ofertantes y sus montos.",
+					"returns": {
+						"_0": "Lista de ofertantes y montos ofertados."
+					}
+				},
+				"showWinner()": {
+					"details": "Función para mostrar al ganador y la oferta ganadora.",
+					"returns": {
+						"ganador": "Dirección del ofertante ganador.",
+						"oferta": "Valor de la oferta ganadora."
+					}
+				},
+				"withdrawExcess()": {
+					"details": "Permite a los ofertantes retirar el exceso de sus depósitos."
+				}
+			},
+			"title": "Auction",
 			"version": 1
 		},
 		"userdoc": {
@@ -286,7 +259,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/TPSubasta.sol": "TPSubasta"
+			"contracts/EjemploSubasta.sol": "AuctionExample"
 		},
 		"evmVersion": "cancun",
 		"libraries": {},
@@ -300,12 +273,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"contracts/TPSubasta.sol": {
-			"keccak256": "0xb1066e5abce7d1cef31716205e47794e5d76096d55ee969173a013bab3b83f06",
+		"contracts/EjemploSubasta.sol": {
+			"keccak256": "0xaf7c2b2b24bb833d432e37c2e4ac9327eb053f5cfe4d3f38f41e6a6bd40a012e",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://8811dcb1fc187ccc2c266ce833e0179195befdc6c072a3da9e423bfdb2dd2166",
-				"dweb:/ipfs/QmUFwh1rf3wqnowriPzGb4hNPFt2UEpnXTZRu8DiyNesht"
+				"bzz-raw://05b4abeae09bcce445145209a0936439ade66679859c51a1ed47324ae5441838",
+				"dweb:/ipfs/QmW1Lw6A5cKeaXY3viJa38zZbcqD7gwSUywJ8KetykKkoR"
 			]
 		}
 	},
