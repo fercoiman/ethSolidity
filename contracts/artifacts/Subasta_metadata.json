@@ -306,6 +306,13 @@
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "withdrawExcessDeposit",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
 			}
 		],
 		"devdoc": {
@@ -336,11 +343,11 @@
 	},
 	"sources": {
 		"contracts/TPSubastaW-v1.sol": {
-			"keccak256": "0xffeec8147511c641c87d1856747291fe21908b7cdf121d27d7f4625911cdedf8",
+			"keccak256": "0xe6ec0e810ec5d3d9987ee23bba097bf480b2139f5c83add40729848caf10d40d",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://80d26ad4eecbcef8129259936dd7621408b552bcae991481b82e3c97fdd9ec7c",
-				"dweb:/ipfs/QmTc94t2Rv55AjaNY3PzDb9DHnAbUzWNtYKPeXJeXmpRip"
+				"bzz-raw://8059adceba20fbe3e3655f710fb8b2221aaf77e227bbe17ea7dc93f3b68d7a91",
+				"dweb:/ipfs/QmeG1mBfEK87fNqYYLvxHysXnnBTgsJZFTKvcKtGoNP8og"
 			]
 		}
 	},

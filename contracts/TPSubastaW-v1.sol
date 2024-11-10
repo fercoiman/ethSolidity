@@ -55,31 +55,36 @@ contract Subasta {
         address bidder = msg.sender;
         uint256 amount = msg.value;
 
-        if(bidAmount > highestBid.amount) {
+        //actualizo la mayor oferta y la agrego a la lista de bids
             highestBid = Bid(payable(bidder), amount);
             bids.push(highestBid);
-        }
-        else{
-            bid = Bid(payable(bidder),amount);
-            bids.push(bid);
-        }
-
-            // VERRRRR
-         if (highestBid.bidder != address(0)) {
+           
+        if (highestBid.bidder != address(0)) {
                 deposits[highestBid.bidder] += highestBid.amount;
             }
 
-
-        
         // Extiende la subasta cada vez que se recibe una oferta en los últimos 10 minutos
-        
+        if(block.timestamp > bidEndTime - 10 minutes){
             bidEndTime += EXTENSION_TIME;
             emit AuctionExtended(bidEndTime);
-        
-
-        emit NewBid(msg.sender, msg.value, block.timestamp);
+        }
+        //Logging nueva oferta
+            emit NewBid(msg.sender, msg.value, block.timestamp);
     }
 
+
+     function withdrawExcessDeposit() public onlyBeforeEnd {
+        uint256 depositedAmount = deposits[msg.sender];
+        uint256 excess = depositedAmount - highestBid.amount;
+        
+        require(excess > 0, "No excess deposit available!");
+        deposits[msg.sender] -= excess; //Descontamos el exceso
+        payable(msg.sender).transfer(excess); //pagamos el exceso
+        emit Refund(msg.sender, excess); //logging de la devolución
+    }
+
+
+        //Mostrar ganador de la subasta
     function getWinner() public view onlyAfterEnd returns (address, uint256) {
         require(auctionEnded, "Auction not finalized yet.");
         return (highestBid.bidder, highestBid.amount);
