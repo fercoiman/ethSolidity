@@ -8,9 +8,9 @@
 			{
 				"inputs": [
 					{
-						"internalType": "uint256",
-						"name": "initialSupply",
-						"type": "uint256"
+						"internalType": "address",
+						"name": "initialOwner",
+						"type": "address"
 					}
 				],
 				"stateMutability": "nonpayable",
@@ -103,6 +103,28 @@
 				"type": "error"
 			},
 			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					}
+				],
+				"name": "OwnableInvalidOwner",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					}
+				],
+				"name": "OwnableUnauthorizedAccount",
+				"type": "error"
+			},
+			{
 				"anonymous": false,
 				"inputs": [
 					{
@@ -125,6 +147,25 @@
 					}
 				],
 				"name": "Approval",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "previousOwner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "OwnershipTransferred",
 				"type": "event"
 			},
 			{
@@ -233,6 +274,24 @@
 				"type": "function"
 			},
 			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "mint",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
 				"inputs": [],
 				"name": "name",
 				"outputs": [
@@ -243,6 +302,26 @@
 					}
 				],
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "renounceOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -323,6 +402,19 @@
 				],
 				"stateMutability": "nonpayable",
 				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "transferOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
 			}
 		],
 		"devdoc": {
@@ -378,6 +470,16 @@
 							"spender": "Address that may be allowed to operate on tokens without being their owner."
 						}
 					}
+				],
+				"OwnableInvalidOwner(address)": [
+					{
+						"details": "The owner is not a valid owner account. (eg. `address(0)`)"
+					}
+				],
+				"OwnableUnauthorizedAccount(address)": [
+					{
+						"details": "The caller account is not authorized to perform an operation."
+					}
 				]
 			},
 			"events": {
@@ -405,6 +507,12 @@
 				"name()": {
 					"details": "Returns the name of the token."
 				},
+				"owner()": {
+					"details": "Returns the address of the current owner."
+				},
+				"renounceOwnership()": {
+					"details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby disabling any functionality that is only available to the owner."
+				},
 				"symbol()": {
 					"details": "Returns the symbol of the token, usually a shorter version of the name."
 				},
@@ -416,6 +524,9 @@
 				},
 				"transferFrom(address,address,uint256)": {
 					"details": "See {IERC20-transferFrom}. Skips emitting an {Approval} event indicating an allowance update. This is not required by the ERC. See {xref-ERC20-_approve-address-address-uint256-bool-}[_approve]. NOTE: Does not update the allowance if the current allowance is the maximum `uint256`. Requirements: - `from` and `to` cannot be the zero address. - `from` must have a balance of at least `value`. - the caller must have allowance for ``from``'s tokens of at least `value`."
+				},
+				"transferOwnership(address)": {
+					"details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
 				}
 			},
 			"version": 1
@@ -442,6 +553,14 @@
 		"remappings": []
 	},
 	"sources": {
+		"@openzeppelin/contracts/access/Ownable.sol": {
+			"keccak256": "0xff6d0bb2e285473e5311d9d3caacb525ae3538a80758c10649a4d61029b017bb",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://8ed324d3920bb545059d66ab97d43e43ee85fd3bd52e03e401f020afb0b120f6",
+				"dweb:/ipfs/QmfEckWLmZkDDcoWrkEvMWhms66xwTLff9DDhegYpvHo1a"
+			]
+		},
 		"@openzeppelin/contracts/interfaces/draft-IERC6093.sol": {
 			"keccak256": "0x880da465c203cec76b10d72dbd87c80f387df4102274f23eea1f9c9b0918792b",
 			"license": "MIT",
@@ -483,11 +602,11 @@
 			]
 		},
 		"contracts/TpPool.sol/TokenA.sol": {
-			"keccak256": "0x6560e863835c94b1d74f97ebe74a57bd658ca2b0b530f2c62d9e64440ef2bbbe",
+			"keccak256": "0x16353345c3566d32e69c87acbf64587142f5005afb5aa601310b39ed9a1d3d64",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://dceeaaf66e76940c4f5988ede37e703684b87471a7c4b4b58e33dd165d51ceb3",
-				"dweb:/ipfs/QmXZE7V9NJmu4bWgNjgSDzzwuy5nRDMSyGKrFgNpcuDAyY"
+				"bzz-raw://0dac8530f417d05b363a0021454c20586469bdd36d1a396da2ee25e5d020d4c8",
+				"dweb:/ipfs/QmU4wnXQwQ7hmUsSJCPAeQjGEQus7Hph6Ug6F5b3QyaYP2"
 			]
 		}
 	},
