@@ -99,7 +99,7 @@
 						"type": "uint256"
 					}
 				],
-				"name": "Swap",
+				"name": "TokensSwapped",
 				"type": "event"
 			},
 			{
@@ -171,32 +171,6 @@
 				"type": "function"
 			},
 			{
-				"inputs": [],
-				"name": "reserveA",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "reserveB",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
 				"inputs": [
 					{
 						"internalType": "uint256",
@@ -247,6 +221,32 @@
 				],
 				"stateMutability": "view",
 				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "totalA",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "totalB",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
 			}
 		],
 		"devdoc": {
@@ -285,11 +285,11 @@
 			]
 		},
 		"contracts/TpPool.sol/SimpleDEX.sol": {
-			"keccak256": "0xf520711edd0d894f0170ca0fd8a37ce1528af087fb5651f3a1a2cc05ad10d3ae",
+			"keccak256": "0xc26066b990c4e409d3dc4ff9587d30570fc0dbbcda4bee1881648d7f340bb66e",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://8e2ab1d499b35765ede87301cbab4e46878cff835a9599b844b167346c85ab67",
-				"dweb:/ipfs/QmSGdHcEbrAqQ5NWAgNW2KYWgjn8NQCm8411DjoL9MebkC"
+				"bzz-raw://e995337851f49585d6500656bdb00ba3907d1102cd5fcb883f8ece06e43761ee",
+				"dweb:/ipfs/QmXwUZW2yL1E8esBPJRje3csjfggtJtxjdffMbX5wQS7p1"
 			]
 		}
 	},

@@ -22,13 +22,13 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 contract SimpleDEX {
     address public tokenA;
     address public tokenB;
-    uint256 public reserveA;
-    uint256 public reserveB;
+    uint256 public totalA;
+    uint256 public totalB;
     address public owner;
 
     event LiquidityAdded(address indexed provider, uint256 amountA, uint256 amountB);
     event LiquidityRemoved(address indexed provider, uint256 amountA, uint256 amountB);
-    event Swap(address indexed user, address fromToken, uint256 inputAmount, uint256 outputAmount);
+    event TokensSwapped(address indexed user, address fromToken, uint256 inputAmount, uint256 outputAmount);
 
     modifier onlyOwner() {
         require(msg.sender == owner, "Only owner can call this function");
@@ -46,46 +46,46 @@ contract SimpleDEX {
         require(IERC20(tokenA).transferFrom(msg.sender, address(this), amountA), "Transfer of TokenA failed");
         require(IERC20(tokenB).transferFrom(msg.sender, address(this), amountB), "Transfer of TokenB failed");
 
-        reserveA += amountA;
-        reserveB += amountB;
+        totalA += amountA;
+        totalB += amountB;
 
         emit LiquidityAdded(msg.sender, amountA, amountB);
     }
     // Swap de TokenA por TokenB
     function swapAforB(uint256 amountAIn) external {
         require(amountAIn > 0, "Amount must be greater than 0");
-        uint256 amountBOut = (amountAIn * reserveB) / (reserveA + amountAIn);
+        uint256 amountBOut = (amountAIn * totalB) / (totalA + amountAIn);
         require(amountBOut > 0, "Insufficient output amount");
 
         IERC20(tokenA).transferFrom(msg.sender, address(this), amountAIn);
         IERC20(tokenB).transfer(msg.sender, amountBOut);
 
-        reserveA += amountAIn;
-        reserveB -= amountBOut;
+        totalA += amountAIn;
+        totalB -= amountBOut;
 
-        emit Swap(msg.sender, tokenA, amountAIn, amountBOut);
+        emit TokensSwapped(msg.sender, tokenA, amountAIn, amountBOut);
     }
     // Swap de TokenB por TokenA
     function swapBforA(uint256 amountBIn) external {
         require(amountBIn > 0, "Amount must be greater than 0");
-        uint256 amountAOut = (amountBIn * reserveA) / (reserveB + amountBIn);
+        uint256 amountAOut = (amountBIn * totalA) / (totalB + amountBIn);
         require(amountAOut > 0, "Insufficient output amount");
 
         IERC20(tokenB).transferFrom(msg.sender, address(this), amountBIn);
         IERC20(tokenA).transfer(msg.sender, amountAOut);
 
-        reserveB += amountBIn;
-        reserveA -= amountAOut;
+        totalB += amountBIn;
+        totalA -= amountAOut;
 
-        emit Swap(msg.sender, tokenB, amountBIn, amountAOut);
+        emit TokensSwapped(msg.sender, tokenB, amountBIn, amountAOut);
     }
 
     function removeLiquidity(uint256 amountA, uint256 amountB) external onlyOwner {
-        require(amountA <= reserveA, "Insufficient TokenA reserve");
-        require(amountB <= reserveB, "Insufficient TokenB reserve");
+        require(amountA <= totalA, "Insufficient TokenA total");
+        require(amountB <= totalB, "Insufficient TokenB total");
 
-        reserveA -= amountA;
-        reserveB -= amountB;
+        totalA -= amountA;
+        totalB -= amountB;
 
         IERC20(tokenA).transfer(msg.sender, amountA);
         IERC20(tokenB).transfer(msg.sender, amountB);
@@ -95,11 +95,11 @@ contract SimpleDEX {
 
     function getPrice(address _token) external view returns (uint256 price) {
         if (_token == tokenA) {
-            require(reserveB > 0, "No liquidity for TokenB");
-            price = reserveA / reserveB;
+            require(totalB > 0, "No liquidity for TokenB");
+            price = totalA / totalB;
         } else if (_token == tokenB) {
-            require(reserveA > 0, "No liquidity for TokenA");
-            price = reserveB / reserveA;
+            require(totalA > 0, "No liquidity for TokenA");
+            price = totalB / totalA;
         } else {
             revert("Token not supported");
         }
