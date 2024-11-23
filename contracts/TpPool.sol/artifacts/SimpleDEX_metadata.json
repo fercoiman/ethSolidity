@@ -285,11 +285,11 @@
 			]
 		},
 		"contracts/TpPool.sol/SimpleDEX.sol": {
-			"keccak256": "0xc26066b990c4e409d3dc4ff9587d30570fc0dbbcda4bee1881648d7f340bb66e",
+			"keccak256": "0x91a8f3fab21be3cb67ef327079509c6b02d2c08c547af3ca82b05706e64996de",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://e995337851f49585d6500656bdb00ba3907d1102cd5fcb883f8ece06e43761ee",
-				"dweb:/ipfs/QmXwUZW2yL1E8esBPJRje3csjfggtJtxjdffMbX5wQS7p1"
+				"bzz-raw://f0f773fe8ef25f2f27dcc88fe349854f28bea519a4d3a915b850ca481f8455bf",
+				"dweb:/ipfs/QmSgm7tt7i92veMF36Kkk83wQZc97RCR1mPXaw8v4ewPoP"
 			]
 		}
 	},
