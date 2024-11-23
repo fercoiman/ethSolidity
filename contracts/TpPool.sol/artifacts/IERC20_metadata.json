@@ -230,7 +230,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/TpPool.sol/TokenA_flattened.sol": "IERC20"
+			"contracts/TpPool.sol/SimpleDEX_flattened.sol": "IERC20"
 		},
 		"evmVersion": "cancun",
 		"libraries": {},
@@ -244,12 +244,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"contracts/TpPool.sol/TokenA_flattened.sol": {
-			"keccak256": "0x7ba56402a82e3eeb3229d9a66f0a3df5de060e84588ac75c12513799db3ee78f",
+		"contracts/TpPool.sol/SimpleDEX_flattened.sol": {
+			"keccak256": "0xdcef3b4ad031ea64ccaef71716eba2191352b51559d1a4857d0b99a05752176b",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://d513d625bb4c9342725af06e40fc6f1fa8d3d8e464395f62d2c0d69e9a24dc93",
-				"dweb:/ipfs/QmcJRccTSuo41WiQ2Cb7YJzSDYGUW9y6iBcHTZptZd2kpb"
+				"bzz-raw://1e0b20ff6fb7387db8cbad8f44237f85b4460084fcc4ae24f0a8f6d415662950",
+				"dweb:/ipfs/QmPAZHCUR8QLabh9k8KUPVDUj8GBsmmYLS8HZ2JZnVKNS2"
 			]
 		}
 	},

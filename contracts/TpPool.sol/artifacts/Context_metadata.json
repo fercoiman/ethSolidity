@@ -19,7 +19,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/TpPool.sol/TokenA_flattened.sol": "Context"
+			"contracts/TpPool.sol/TokenB_flattened.sol": "Context"
 		},
 		"evmVersion": "cancun",
 		"libraries": {},
@@ -33,12 +33,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"contracts/TpPool.sol/TokenA_flattened.sol": {
-			"keccak256": "0x7ba56402a82e3eeb3229d9a66f0a3df5de060e84588ac75c12513799db3ee78f",
+		"contracts/TpPool.sol/TokenB_flattened.sol": {
+			"keccak256": "0xcb27d948be35ae5244ec6a1e9449be4f5047bd97397e4c997cbc2af1c22e2e53",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://d513d625bb4c9342725af06e40fc6f1fa8d3d8e464395f62d2c0d69e9a24dc93",
-				"dweb:/ipfs/QmcJRccTSuo41WiQ2Cb7YJzSDYGUW9y6iBcHTZptZd2kpb"
+				"bzz-raw://dbc51367d9a26bcafd97e73809340b6851f32c2c7f36ebb64d77e1f33f58b79b",
+				"dweb:/ipfs/QmTzxKXYGkqpJdbv3gBKHSwtvgcTZeNK7HzPHFGNRRbaxD"
 			]
 		}
 	},
