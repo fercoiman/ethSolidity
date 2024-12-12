@@ -5,10 +5,9 @@ pragma solidity ^0.8.22;
 import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
 contract TokenA is ERC20("TokenA", "TOKA") {
-    constructor()
-        
+    constructor()   
     {
-        _mint(msg.sender, 70000 * 10 ** decimals());
+        _mint(msg.sender, 7000000);
     }
 
 }

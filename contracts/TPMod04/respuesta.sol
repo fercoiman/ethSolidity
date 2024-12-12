@@ -14,7 +14,7 @@ contract SimpleDEX is Ownable {
     event TokensSwapped(address indexed user, address fromToken, uint256 inputAmount, uint256 outputAmount);
     event LiquidityRemoved(address indexed provider, uint256 amountA, uint256 amountB);
 
-    constructor(address _tokenA, address _tokenB) {
+    constructor(address initialOwner, address _tokenA, address _tokenB) Ownable(initialOwner) {
         tokenA = _tokenA;
         tokenB = _tokenB;
     }
@@ -86,24 +86,3 @@ contract SimpleDEX is Ownable {
     }
 }
 
-// SPDX-License-Identifier: MIT
-pragma solidity ^0.8.22;
-
-import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-
-contract TokenA is ERC20("TokenA", "TOKA") {
-    constructor() {
-        _mint(msg.sender, 70000 * 10 ** decimals());
-    }
-}
-
-// SPDX-License-Identifier: MIT
-pragma solidity ^0.8.22;
-
-import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-
-contract TokenB is ERC20("TokenB", "TOKB") {
-    constructor() {
-        _mint(msg.sender, 100000 * 10 ** decimals());
-    }
-}
