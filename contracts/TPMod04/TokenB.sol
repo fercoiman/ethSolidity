@@ -8,7 +8,7 @@ contract TokenB is ERC20("TokenB", "TOKB") {
     constructor()
         
     {
-        _mint(msg.sender, 100000 * 10 ** decimals());
+        _mint(msg.sender, 8000000 );
     }
 
 }
