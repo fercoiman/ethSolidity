@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.20+commit.a1b79de6"
+		"version": "0.8.26+commit.8a97fa7a"
 	},
 	"language": "Solidity",
 	"output": {
@@ -121,7 +121,7 @@
 		"compilationTarget": {
 			"contracts/TPMod04/SimpleDexV2_flattened.sol": "Ownable"
 		},
-		"evmVersion": "shanghai",
+		"evmVersion": "cancun",
 		"libraries": {},
 		"metadata": {
 			"bytecodeHash": "ipfs"
@@ -134,11 +134,11 @@
 	},
 	"sources": {
 		"contracts/TPMod04/SimpleDexV2_flattened.sol": {
-			"keccak256": "0x97316e957f86517e4421b2f670c8898524add1ef713b6cb8ac22b9d61e937162",
+			"keccak256": "0x116159fa1990aa933fb0f1334b46ce71e265aa1108a3705efeb67789bfdcff58",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://3656a21ffea7f14858f7c9c17ad54cbae12745b950c7a696a9e5243bcb941618",
-				"dweb:/ipfs/QmbXNhdk9gnSnkHCa2uAsKeRBDY7RhzT1gMy9CRXPFEFmE"
+				"bzz-raw://9bb34224810b9daca7dc9be1c7c79ed4779b796e294d6c964597374533460acb",
+				"dweb:/ipfs/QmSD8eZLdRmHzbDTWdonpLrZjboeEM7FwtWfNP1ip4dEbo"
 			]
 		}
 	},

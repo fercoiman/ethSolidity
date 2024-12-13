@@ -19,7 +19,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/TPMod04/TokenB_flattened.sol": "Context"
+			"contracts/TPMod04/SimpleDexV2_flattened.sol": "Context"
 		},
 		"evmVersion": "cancun",
 		"libraries": {},
@@ -33,12 +33,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"contracts/TPMod04/TokenB_flattened.sol": {
-			"keccak256": "0x104b8c6b6fecc21b6c97ac075f7dd6ea3e451e27f102d13f18f28464cee695a3",
+		"contracts/TPMod04/SimpleDexV2_flattened.sol": {
+			"keccak256": "0x116159fa1990aa933fb0f1334b46ce71e265aa1108a3705efeb67789bfdcff58",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://7f12df75bb73a8d8d5f3a49a359ca71a81b7e1e5f96400478408c397ebd7459c",
-				"dweb:/ipfs/QmYBHRdg6RwAofiBL6Jb2K4ybvcwRjGup3fWYNEPEPdPj3"
+				"bzz-raw://9bb34224810b9daca7dc9be1c7c79ed4779b796e294d6c964597374533460acb",
+				"dweb:/ipfs/QmSD8eZLdRmHzbDTWdonpLrZjboeEM7FwtWfNP1ip4dEbo"
 			]
 		}
 	},

@@ -4,7 +4,7 @@
 
 // OpenZeppelin Contracts (last updated v5.0.1) (utils/Context.sol)
 
-pragma solidity ^0.8.20;
+pragma solidity ^0.8.26;
 
 /**
  * @dev Provides information about the current execution context, including the
@@ -34,8 +34,6 @@ abstract contract Context {
 
 
 // OpenZeppelin Contracts (last updated v5.0.0) (access/Ownable.sol)
-
-
 
 
 /**
@@ -136,7 +134,6 @@ abstract contract Ownable is Context {
 
 
 // OpenZeppelin Contracts (last updated v5.1.0) (token/ERC20/IERC20.sol)
-
 
 
 /**
